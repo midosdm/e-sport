@@ -1,0 +1,33 @@
+.league-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.league-header-container{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.league-header-item{
+    font-size: 1.5em;
+    color: steelblue;
+    cursor: pointer;
+}
+
+.league-content-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.league-content-item{
+    font-size: 1em;
+    cursor: pointer;
+    
+}
+
+#league-image{
+    height: 80px;
+}

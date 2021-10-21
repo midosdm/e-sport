@@ -12,7 +12,7 @@ const LeagueList = () => {
             
             {
             leagues &&
-            <>
+            <>9
             <tr>
                 <td class="table-title">League ID</td>
                 <td class="table-title">League name</td>
@@ -20,8 +20,7 @@ const LeagueList = () => {
             </tr>
             {leagues.map(league => (
                 <>
-                
-                <tr key="league.id">
+                <tr key={league.id}>
                     
                         <td class="table-content">{league.id}</td>
                         <Link to={`/leagues/${league.id}`}>
