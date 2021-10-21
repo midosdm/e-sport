@@ -5,5 +5,9 @@
 .table-title{
     color: steelblue;
     font-size: 1.5em;
-    padding-right: 16px;
+    padding-right: 10px;
+}
+
+.table-content{
+    padding-right: 10px;
 }

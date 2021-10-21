@@ -1,10 +1,10 @@
 import  {useState, useEffect} from 'react';
 
 const useFetch = (url) => {
-    const [leagues, setLeagues] = useState();
+    const [data, setData] = useState();
     const accessToken = '4PCyggc34cOzP8obxiOXox-1Q-72ij77lzc6Mjo4qhGyOAPza5Q';
     useEffect(() => {
-        fetch('https://api.pandascore.co/leagues',{
+        fetch(url,{
             headers: {
                 'Accept' : 'application/json',
                 'Authorization' : accessToken
@@ -13,7 +13,7 @@ const useFetch = (url) => {
         .then(result => result.json())
         .then(
             (result) => {
-                setLeagues(result);
+                setData(result);
             },
             (err) => {
                 console.log(err);
@@ -21,7 +21,7 @@ const useFetch = (url) => {
         )
     },[])
     return {
-        leagues
+        data
     }
 }
 
