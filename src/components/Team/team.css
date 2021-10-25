@@ -1,0 +1,33 @@
+.team-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.team-header-container{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.team-header-item{
+    font-size: 1.5em;
+    color: steelblue;
+    cursor: pointer;
+}
+
+.team-content-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.team-content-item{
+    font-size: 1em;
+    cursor: pointer;
+    
+}
+
+#team-image{
+    height: 80px;
+}

@@ -12,21 +12,21 @@ const LeagueList = () => {
             
             {
             leagues &&
-            <>9
+            <>
             <tr>
-                <td class="table-title">League ID</td>
-                <td class="table-title">League name</td>
-                <td class="table-title">League logo</td>
+                <td className="table-title">League ID</td>
+                <td className="table-title">League name</td>
+                <td className="table-title">League logo</td>
             </tr>
             {leagues.map(league => (
                 <>
                 <tr key={league.id}>
                     
-                        <td class="table-content">{league.id}</td>
+                        <td className="table-content">{league.id}</td>
                         <Link to={`/leagues/${league.id}`}>
-                            <td class="table-content">{league.name}</td>
+                            <td className="table-content">{league.name}</td>
                         </Link>
-                        <td class="table-content"><img id="logo" src={league.image_url} /></td>
+                        <td className="table-content"><img id="logo" src={league.image_url} /></td>
                     
                     </tr>
                 </>
