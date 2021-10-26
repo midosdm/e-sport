@@ -15,6 +15,7 @@ const Team = () => {
                 <div class="team-header-container">
                     <div class="team-header-item">Logo</div>
                     <div class="team-header-item">Nom</div>
+                    <div class="team-header-item">Joueurs</div>
                 </div>
                 <div class="team-content-container">
                     {
@@ -25,6 +26,15 @@ const Team = () => {
                     }
                     
                     <div class="team-content-item">{team.name}</div>
+                    
+                    <div class="team-content-item">
+                        { team.players &&
+                        team.players.map((player) => (
+                            <div key={player.id}>
+                                {player.id}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         }

@@ -25,7 +25,7 @@
 .league-content-item{
     font-size: 1em;
     cursor: pointer;
-    
+    width: 180px;
 }
 
 #league-image{

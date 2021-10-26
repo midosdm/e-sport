@@ -1,5 +1,5 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import useFetch from '../../custom/useFetch';
 import './league.css';
 
@@ -19,6 +19,7 @@ const League = () => {
                     <div class="league-header-item">Site web</div>
                     <div class="league-header-item">Jeu video</div>
                     <div class="league-header-item">Series</div>
+                    <div class="league-header-item">Winner</div>
                 </div>
                 <div class="league-content-container">
                     <div class="league-content-item"><img id="league-image" src={league.image_url}/></div>
@@ -34,11 +35,34 @@ const League = () => {
                     }</div>
                     <div class="league-content-item">{
                         league.series.map(series => (
+                            <>
                             <div key={series.id}>
                                 {series.full_name}
                             </div>
+                            </>
                         ))
                     }</div>
+
+                    {
+                        league.series &&
+                        <div class="league-content-item">
+                            {league.series.map((series) => (
+                                <>
+                                    <div key={series.id}>
+                                        {series.winner_id ? 
+                                        <Link to={`/teams/${series.winner_id}`}>
+                                            {series.winner_id}
+                                        </Link>
+                                        :
+                                        <div>le vainqueur de cette serie est inconnu</div>
+                                        }
+                                    </div>
+                                </>
+                            ))   
+                            }  
+                        
+                        </div>
+                    }
                 </div>
             </div>
             
