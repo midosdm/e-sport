@@ -4,11 +4,13 @@ import League from './components/league/League';
 import PageNotFound from './errors/PageNotFound';
 import TeamsList from './components/Teams/TeamsList';
 import Team from './components/Team/Team';
+import Games from './components/games/Games';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Games/>
         <Switch>
           <Route exact path="/leagues">
             <LeagueList />
