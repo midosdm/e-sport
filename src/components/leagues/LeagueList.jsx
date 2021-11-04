@@ -3,65 +3,75 @@ import './leagues.css';
 import {Link} from 'react-router-dom';
 import useFetch from '../../custom/useFetch';
 import {ContextSelectedGame} from '../games/Games';
+import Pagination from '../pagination/Pagination';
 
 const LeagueList = () => {
-    const {data: leagues} = useFetch(process.env.REACT_APP_LEAGUES_API_URL);
-    // const [pageNumber, setPageNumber] = useState(0);
+    const {data} = useFetch(process.env.REACT_APP_LEAGUES_API_URL);
+    const [leagues, setLeagues] = useState();
+    const {selectedGame} = useContext(ContextSelectedGame);
 
-    // const leaguesPerPage = 5;
-    // const pagesVisited = pageNumber * leaguesPerPage;
-
-    // const displayLeagues = leagues.slice(pagesVisited, pagesVisited + leaguesPerPage).map((league) =>{
-    //        return(
-    //         <>
-    //             <tr key={league.id}>
-                    
-    //                     <td className="table-content">{league.id}</td>
-    //                     <Link to={`/leagues/${league.id}`}>
-    //                         <td className="table-content">{league.name}</td>
-    //                     </Link>
-    //                     <td className="table-content"><img id="logo" src={league.image_url} /></td>
-                    
-    //                 </tr>
-    //         </>
-    //        ) 
-    // })
-    const {selectedGame, setSelectedGame} = useContext(ContextSelectedGame);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [leaguesPerPage, setLeaguesPerPage] = useState(5);
     
+    //GET CURRENT POSTS PER PAGE
+    const indexOfLastLeague = currentPage * leaguesPerPage;
+    const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
+    const currentLeagues= leagues.slice(indexOfFirstLeague, indexOfLastLeague);
+
+
     useEffect(()=> {
-        console.log(selectedGame + " from context");
-    }, [selectedGame]);
+        
+        if(data && selectedGame == ''){
+            setLeagues(data);
+        
+        }
+        else if(data && selectedGame !== ''){
+            
+            const results = data.filter((league)=>{
+                return league.videogame.name.startsWith(selectedGame);
+            })
+            setLeagues(results);
+           
+        }
+    }, [data, selectedGame]);
+
 
     return (
         <>
-        <table>
-            
+         {/* <div class="page-title">
+         <h2>Leagues:</h2>
+         </div>
+         
             {
             leagues &&
-            <>
-            <tr>
-                <td className="table-title">League ID</td>
-                <td className="table-title">League name</td>
-                <td className="table-title">League logo</td>
-            </tr>
+            
             <>{leagues.map(league=>(
                 
                     <>
-                    <tr key={league.id}>
+                    <div class="container">
+                        <div class="item">
+                        <img
+                            id="logo"
+                            src={league.image_url}
+                            alt="logo"
+                        />
+                        </div>
                         
-                            <td className="table-content">{league.id}</td>
-                            <Link to={`/leagues/${league.id}`}>
-                                <td className="table-content">{league.name}</td>
-                            </Link>
-                            <td className="table-content"><img id="logo" src={league.image_url} /></td>
-                        
-                        </tr>
+                        <div class="item">
+                            <h1>{league.name}</h1> 
+                        </div>
+                        <Link to={`/leagues/${league.id}`}>
+                        <div class="item">
+                            <button id="btn">view details <i class="fa fa-arrow-right"></i></button>
+                        </div>
+                        </Link>
+                    </div>
                 </>
             ))}</>
-            </>
-        }
-        </table>
-        
+        }  */}
+
+        <Pagination leagues={currentLeagues} />
+
         </>
     )
 }

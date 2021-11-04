@@ -12,26 +12,23 @@ const Team = () => {
         {
             team &&
             <div class="team-container">
-                <div class="team-header-container">
-                    <div class="team-header-item">Logo</div>
-                    <div class="team-header-item">Nom</div>
-                    <div class="team-header-item">Joueurs</div>
-                </div>
-                <div class="team-content-container">
+                
+                <div class="team-item">
                     {
                         team.image_url ? 
-                        <div class="team-content-item"><img id="team-image" src={team.image_url}/></div>
+                        <img id="team-image" src={team.image_url}/>
                         :
                         <div> Ce team n'a pas de Logo</div>
                     }
                     
-                    <div class="team-content-item">{team.name}</div>
+                    <div class="team-item"><h1>{team.name}</h1></div>
                     
-                    <div class="team-content-item">
+                    <div class="team-item">
+                        <h1>Les joueurs:</h1>
                         { team.players &&
                         team.players.map((player) => (
                             <div key={player.id}>
-                                {player.id}
+                                {player.first_name}
                             </div>
                         ))}
                     </div>

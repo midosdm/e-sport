@@ -19,16 +19,13 @@ const Games = () => {
     // }, [dispatch])
     const {data:games} = useFetch('https://api.pandascore.co/videogames');
 
-    const [selectedGame, setSelectedGame] = useState();
+    const [selectedGame, setSelectedGame] = useState("");
 
      const handleChange = (e) => {
         //  dispatch(selectGame(e.target.value));
         setSelectedGame(e.target.value);
      }
 
-     useEffect(()=> {
-         console.log(selectedGame);
-     },[selectedGame])
 
     
 
@@ -38,7 +35,7 @@ const Games = () => {
             id="game-select-list"
             value={selectedGame}
             onChange={(handleChange)} >
-            <option >All teams</option>
+            <option value="">All games</option>
             {games &&
                 games.map(game =>
                     (

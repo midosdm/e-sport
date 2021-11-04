@@ -10,9 +10,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Games/>
+        
         <Switch>
+        
           <Route exact path="/leagues">
+          <Games/>
             <LeagueList />
           </Route>
 

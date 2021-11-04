@@ -1,46 +1,42 @@
-import React from 'react';
-import useFetch from '../../custom/useFetch';
-import './teams.css';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 
-const TeamsList = () => {
-    const {data: teams} = useFetch(process.env.REACT_APP_TEAMS_API_URL);
+const Pagination = ({leagues}) => {
+//-------------- PAGINATION --------------//
 
-    return(
+    const [pageNumber, setPageNumber] = useState(0);
+
+    
+       return(
         <>
-       <div class="page-title">
-         <h2>Teams:</h2>
-         </div>
-         
-            {
-            teams &&
-            
-            <>{teams.map(team=>(
-                
-                    <>
+            {leagues &&
+            leagues.map(league=>(
+                    
+                <>
                     <div class="container">
                         <div class="item">
                         <img
                             id="logo"
-                            src={team.image_url}
+                            src={league.image_url}
                             alt="logo"
                         />
                         </div>
                         
                         <div class="item">
-                            <h1>{team.name}</h1> 
+                            <h1>{league.name}</h1> 
                         </div>
-                        <Link to={`/teams/${team.id}`}>
+                        <Link to={`/leagues/${league.id}`}>
                         <div class="item">
                             <button id="btn">view details <i class="fa fa-arrow-right"></i></button>
                         </div>
                         </Link>
                     </div>
                 </>
-            ))}</>
-        }
+            )
+            )
+            }
         </>
-    )
+       ) 
 }
 
-export default TeamsList;
+export default Pagination;

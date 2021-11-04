@@ -1,33 +1,43 @@
+
+.page-title{
+    text-align: center;
+   }
+   
 .league-container{
-    display: flex;
+       border-radius: 6px;
+       box-shadow: 1px 1px 2px gray;
+       padding: 16px;
+       margin-bottom: 30px;
+       display:flex;
+       align-items: center;
+       flex-direction: column;
+   }
+
+
+   .item{
+       height:80;   }
+   
+.series-container{
+    display:flex;
+    align-items:center;
     flex-direction: column;
+    border-radius: 6px;
+    width:40%;
+    margin:auto;
+    box-shadow: 1px 1px 2px gray;
+    padding: 16px;
+    margin-bottom: 30px;
+   }
+
+.series-item{
+    padding:8px;
 }
 
-.league-header-container{
-    display: flex;
-    justify-content: space-around;
+.label{
+    font-size: 1.2em;
+    color:#008CBA;
+}
+
+#winner-label{
     
-}
-
-.league-header-item{
-    font-size: 1.5em;
-    color: steelblue;
-    cursor: pointer;
-}
-
-.league-content-container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    
-}
-
-.league-content-item{
-    font-size: 1em;
-    cursor: pointer;
-    width: 180px;
-}
-
-#league-image{
-    height: 80px;
 }

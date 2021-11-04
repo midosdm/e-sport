@@ -1,8 +1,7 @@
 import React from 'react';
 import {useParams, Link} from 'react-router-dom';
 import useFetch from '../../custom/useFetch';
-import './league.css';
-
+import './league.css'
 const League = () => {
     const {id} = useParams();
     const {data: league} = useFetch(process.env.REACT_APP_LEAGUE_API_URL + '/' + id + '/');
@@ -13,45 +12,51 @@ const League = () => {
         
             <>
             <div class="league-container">
-                <div class="league-header-container">
-                    <div class="league-header-item">Image</div>
-                    <div class="league-header-item">Nom</div>
-                    <div class="league-header-item">Site web</div>
-                    <div class="league-header-item">Jeu video</div>
-                    <div class="league-header-item">Series</div>
-                    <div class="league-header-item">Winner</div>
-                </div>
-                <div class="league-content-container">
-                    <div class="league-content-item"><img id="league-image" src={league.image_url}/></div>
-                    <div class="league-content-item">{league.name}</div>
-                    <div class="league-content-item">{league.url?
-                        <div>{league.url}</div>
-                        :
-                        <div>le league n'a pas de site web</div>
-                    }
-                    </div>
-                    <div class="league-content-item">{
+                        <div class="item">
+                        <img
+                            id="logo"
+                            src={league.image_url}
+                            alt="logo"
+                        />
+                        </div>
+                        
+                        <div class="item">
+                            <h1>{league.name}</h1> 
+                        </div>
+
+                        <div class="item">
+                                {league.url?
+                                <div><span class="label">Site:</span>{league.url}</div>
+                            :
+                            <div>le league n'a pas de site web</div>
+                            }
+                        </div>
+                    <div class="item"><span class="label">Game:</span>{
                         league.videogame.name
                     }</div>
-                    <div class="league-content-item">{
+                    
+                    
+                </div>
+
+                <div class="series-container">
+                <div class="series-item"> {
                         league.series.map(series => (
                             <>
                             <div key={series.id}>
-                                {series.full_name}
+                            <span class="label">Series:</span>{series.full_name}
                             </div>
                             </>
                         ))
                     }</div>
-
                     {
                         league.series &&
-                        <div class="league-content-item">
+                        <div class="series-item">
                             {league.series.map((series) => (
                                 <>
                                     <div key={series.id}>
                                         {series.winner_id ? 
                                         <Link to={`/teams/${series.winner_id}`}>
-                                            {series.winner_id}
+                                            <span class="winner-label">Vainqueur</span>
                                         </Link>
                                         :
                                         <div>le vainqueur de cette serie est inconnu</div>
@@ -63,8 +68,9 @@ const League = () => {
                         
                         </div>
                     }
-                </div>
-            </div>
+                    </div>
+
+
             
             </>
         }

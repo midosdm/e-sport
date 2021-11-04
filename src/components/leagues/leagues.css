@@ -1,13 +1,32 @@
-#logo{
-    height: 40px;
+
+.page-title{
+ text-align: center;
 }
 
-.table-title{
-    color: steelblue;
-    font-size: 1.5em;
-    padding-right: 10px;
+.container{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    border-radius: 6px;
+    width:40%;
+    margin:auto;
+    box-shadow: 1px 1px 2px gray;
+    padding: 16px;
+    margin-bottom: 30px;
+    
 }
 
-.table-content{
-    padding-right: 10px;
+#btn{
+    background: transparent;
+    border: none;
+    color: #008CBA;
+    padding:8px;
+    font-size: 1.1em;
+}
+
+#btn:hover{
+    background: rgb(241, 240, 240);
+    border:transparent;
+    border-radius: 5px;
+    cursor: pointer;
 }
