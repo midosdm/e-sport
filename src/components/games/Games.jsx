@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {
-    gamesAsync,
-    gamesSelector,
-    selectGame
-} from '../../features/games/gamesSlice';
+import './games.css';
+// import {useSelector, useDispatch} from 'react-redux';
+// import {
+//     gamesAsync,
+//     gamesSelector,
+//     selectGame
+// } from '../../features/games/gamesSlice';
 import useFetch from '../../custom/useFetch';
-import LeagueList from '../leagues/LeagueList';
 
 
-export const ContextSelectedGame =React.createContext("");
-
-const Games = () => {
+const Games = ({handleChange}) => {
     // const {selectedGame, games} = useSelector(gamesSelector);
     // const dispatch = useDispatch();
     // useEffect(() =>{
@@ -19,24 +17,19 @@ const Games = () => {
     // }, [dispatch])
     const {data:games} = useFetch('https://api.pandascore.co/videogames');
 
-    const [selectedGame, setSelectedGame] = useState("");
-
-     const handleChange = (e) => {
-        //  dispatch(selectGame(e.target.value));
-        setSelectedGame(e.target.value);
-     }
-
-
-    
-
     return (
         <>
             <select 
             id="game-select-list"
-            value={selectedGame}
+            value={localStorage.getItem("selectedGame") ? localStorage.getItem("selectedGame") : "All games"}
             onChange={(handleChange)} >
-            <option value="">All games</option>
+            
             {games &&
+            <>
+            <option value="">
+                all games
+            </option>
+                {
                 games.map(game =>
                     (
                     <>
@@ -44,13 +37,15 @@ const Games = () => {
                     </>
                     ) 
                 )
+                }
+            </>
             }
             </select>
-            <ContextSelectedGame.Provider value={{selectedGame, setSelectedGame}}>
+            {/* <ContextSelectedGame.Provider value={{selectedGame, setSelectedGame}}>
                 <div>
                     <LeagueList />
                 </div>
-            </ContextSelectedGame.Provider>
+            </ContextSelectedGame.Provider> */}
         </>
     )
 }

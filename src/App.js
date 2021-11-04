@@ -1,3 +1,4 @@
+import React,{useState, useEffect} from 'react';
 import LeagueList from "./components/leagues/LeagueList";
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import League from './components/league/League';
@@ -5,16 +6,31 @@ import PageNotFound from './errors/PageNotFound';
 import TeamsList from './components/Teams/TeamsList';
 import Team from './components/Team/Team';
 import Games from './components/games/Games';
+import contextSelectedGame from "./context/Context";
+import Navbar from './components/navbar/Navbar';
 
 function App() {
+
+  const [selectedGame, setSelectedGame] = useState("");
+
+     const handleChange = (e) => {
+        //  dispatch(selectGame(e.target.value));
+        setSelectedGame(e.target.value);
+        localStorage.setItem("selectedGame", e.target.value);
+     }
+
+
   return (
     <div className="App">
       <Router>
         
         <Switch>
         
+
+        <contextSelectedGame.Provider value={{selectedGame, setSelectedGame}}>
+          
+        <Navbar handleChange={handleChange}/>
           <Route exact path="/leagues">
-          <Games/>
             <LeagueList />
           </Route>
 
@@ -29,6 +45,8 @@ function App() {
           <Route exact path="/teams/:id">
             <Team />
           </Route>
+
+        </contextSelectedGame.Provider>
 
           <Route exact path="/">
             <Redirect to="/leagues"/>

@@ -2,43 +2,43 @@ import React, {useState, useEffect,useContext} from 'react';
 import './leagues.css';
 import {Link} from 'react-router-dom';
 import useFetch from '../../custom/useFetch';
-import {ContextSelectedGame} from '../games/Games';
+import contextSelectedGame from '../../context/Context';
 import Pagination from '../pagination/Pagination';
 
 const LeagueList = () => {
     const {data} = useFetch(process.env.REACT_APP_LEAGUES_API_URL);
     const [leagues, setLeagues] = useState();
-    const {selectedGame} = useContext(ContextSelectedGame);
+    const {selectedGame} = useContext(contextSelectedGame);
+
+    //------------pagination declaration start -----------
 
     const [currentPage, setCurrentPage] = useState(1);
     const [leaguesPerPage, setLeaguesPerPage] = useState(5);
     
-    //GET CURRENT POSTS PER PAGE
-    const indexOfLastLeague = currentPage * leaguesPerPage;
-    const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
-    const currentLeagues= leagues.slice(indexOfFirstLeague, indexOfLastLeague);
+    //GET CURRENT LEAGUES PER PAGE
+    // const indexOfLastLeague = currentPage * leaguesPerPage;
+    // const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
+    // const currentLeagues= data ? leagues.slice(indexOfFirstLeague, indexOfLastLeague) : console.log();
+
+    //-----------Pagination declaration end -----------
 
 
     useEffect(()=> {
-        
-        if(data && selectedGame == ''){
-            setLeagues(data);
-        
-        }
-        else if(data && selectedGame !== ''){
-            
+        if(data && localStorage.getItem("selectedGame") != ""){
             const results = data.filter((league)=>{
-                return league.videogame.name.startsWith(selectedGame);
-            })
-            setLeagues(results);
-           
+                        return league.videogame.name.startsWith(localStorage.getItem('selectedGame'));
+                    })
+                    setLeagues(results);
+        } else{
+            setLeagues(data);
         }
+        
     }, [data, selectedGame]);
 
 
     return (
         <>
-         {/* <div class="page-title">
+         <div class="page-title">
          <h2>Leagues:</h2>
          </div>
          
@@ -68,9 +68,9 @@ const LeagueList = () => {
                     </div>
                 </>
             ))}</>
-        }  */}
+        }
 
-        <Pagination leagues={currentLeagues} />
+        {/* { currentLeagues && <Pagination leagues={currentLeagues} /> } */}
 
         </>
     )
