@@ -23,21 +23,6 @@ const LeagueList = () => {
         
     }, [data,selectedGame]);
 
-    //------------pagination declaration start -----------
-
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [leaguesPerPage, setLeaguesPerPage] = useState(2);
-    
-    // //GET CURRENT LEAGUES PER PAGE
-    // const indexOfLastLeague = currentPage * leaguesPerPage;
-    // const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
-    // let currentLeagues = leagues? leagues.slice(indexOfFirstLeague, indexOfLastLeague): "";
-
-    // const paginate = pageNumber => setCurrentPage(pageNumber);
-    //-----------Pagination declaration end -----------
-
-    // ----------- REACT PAGINATE ------------- 
-
     const[pageNumber, setPageNumber] = useState(0);
 
     const leaguesPerPage = 5;
