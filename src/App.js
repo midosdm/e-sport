@@ -28,7 +28,9 @@ function App() {
         
 
         <contextSelectedGame.Provider value={{selectedGame, setSelectedGame}}>
-          
+        <Route exact path="/">
+            <Redirect to="/leagues"/>
+        </Route>
         <Navbar handleChange={handleChange}/>
           <Route exact path="/leagues">
             <LeagueList />
@@ -48,9 +50,7 @@ function App() {
 
         </contextSelectedGame.Provider>
 
-          <Route exact path="/">
-            <Redirect to="/leagues"/>
-          </Route>
+        
           <Route path="*">
             <PageNotFound />
           </Route>

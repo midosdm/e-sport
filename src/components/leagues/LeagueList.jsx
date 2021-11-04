@@ -3,25 +3,13 @@ import './leagues.css';
 import {Link} from 'react-router-dom';
 import useFetch from '../../custom/useFetch';
 import contextSelectedGame from '../../context/Context';
-import Pagination from '../pagination/Pagination';
+import ReactPaginate from 'react-paginate';
+import '../pagination/pagination.css'
 
 const LeagueList = () => {
     const {data} = useFetch(process.env.REACT_APP_LEAGUES_API_URL);
     const [leagues, setLeagues] = useState();
     const {selectedGame} = useContext(contextSelectedGame);
-
-    //------------pagination declaration start -----------
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [leaguesPerPage, setLeaguesPerPage] = useState(5);
-    
-    //GET CURRENT LEAGUES PER PAGE
-    // const indexOfLastLeague = currentPage * leaguesPerPage;
-    // const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
-    // const currentLeagues= data ? leagues.slice(indexOfFirstLeague, indexOfLastLeague) : console.log();
-
-    //-----------Pagination declaration end -----------
-
 
     useEffect(()=> {
         if(data && localStorage.getItem("selectedGame") != ""){
@@ -33,21 +21,32 @@ const LeagueList = () => {
             setLeagues(data);
         }
         
-    }, [data, selectedGame]);
+    }, [data,selectedGame]);
 
+    //------------pagination declaration start -----------
 
-    return (
-        <>
-         <div class="page-title">
-         <h2>Leagues:</h2>
-         </div>
-         
-            {
-            leagues &&
-            
-            <>{leagues.map(league=>(
-                
-                    <>
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [leaguesPerPage, setLeaguesPerPage] = useState(2);
+    
+    // //GET CURRENT LEAGUES PER PAGE
+    // const indexOfLastLeague = currentPage * leaguesPerPage;
+    // const indexOfFirstLeague = indexOfLastLeague - leaguesPerPage;
+    // let currentLeagues = leagues? leagues.slice(indexOfFirstLeague, indexOfLastLeague): "";
+
+    // const paginate = pageNumber => setCurrentPage(pageNumber);
+    //-----------Pagination declaration end -----------
+
+    // ----------- REACT PAGINATE ------------- 
+
+    const[pageNumber, setPageNumber] = useState(0);
+
+    const leaguesPerPage = 5;
+    const pagesVisited = pageNumber * leaguesPerPage;
+
+    const displayLeagues = leagues ? leagues.slice(pagesVisited, pagesVisited + leaguesPerPage)
+    .map(league => {
+        return (
+            <>
                     <div class="container">
                         <div class="item">
                         <img
@@ -66,11 +65,36 @@ const LeagueList = () => {
                         </div>
                         </Link>
                     </div>
-                </>
-            ))}</>
-        }
+            </>
+        )
+    }) : "";
 
-        {/* { currentLeagues && <Pagination leagues={currentLeagues} /> } */}
+    const pageCount = Math.ceil(leagues.length / leaguesPerPage)
+    const changePage = ({selected}) => {
+        setPageNumber(selected)
+    }
+
+    return (
+        <>
+         <div class="page-title">
+         <h2>Leagues:</h2>
+         </div>
+
+         <div>
+            {displayLeagues}
+         </div>
+            
+         <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount = {pageCount}
+                    onPageChange={changePage}
+                    containerClassName={'paginationButtons'}
+                    previousLinkClassName = {"previousButton"}
+                    nextLinkClassName = {"previousButton"}
+                    disabledClassName = {"paginationDisabled"}
+                    activeClassName = {"paginationActive"}
+                />
 
         </>
     )
