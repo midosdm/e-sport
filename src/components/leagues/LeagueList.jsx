@@ -54,7 +54,7 @@ const LeagueList = () => {
         )
     }) : "";
 
-    const pageCount = Math.ceil(leagues.length / leaguesPerPage)
+    const pageCount = leagues ? Math.ceil(leagues.length / leaguesPerPage) : 0;
     const changePage = ({selected}) => {
         setPageNumber(selected)
     }
