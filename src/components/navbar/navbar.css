@@ -13,6 +13,11 @@
     background-color: #4c439e;
     position: relative;
   }
+
+  a{
+    color:white;
+    text-decoration:none;
+  }
   
   .nav > .nav-header {
     display: inline;

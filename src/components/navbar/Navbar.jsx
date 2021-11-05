@@ -8,13 +8,15 @@ const Navbar = ({handleChange}) => {
         <>
         <div class="nav">
             <input type="checkbox" id="nav-check"/>
-            <Link to='/'>
             <div class="nav-header">
                 <div class="nav-title">
-                E-SPORT
+                    <Link to='/'>
+                        E-SPORT
+                    </Link>
                 </div>
+            
             </div>
-            </Link>
+            
             <div class="nav-btn">
                 <label for="nav-check">
                 <span></span>
