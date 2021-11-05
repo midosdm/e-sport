@@ -15,7 +15,7 @@ const Games = ({handleChange}) => {
     // useEffect(() =>{
     //     dispatch(gamesAsync());
     // }, [dispatch])
-    const {data:games} = useFetch('https://api.pandascore.co/videogames');
+    const {data:games} = useFetch(process.env.REACT_APP_VIDEOGAMES_API_URL);
 
     return (
         <>
