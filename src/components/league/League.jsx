@@ -4,7 +4,7 @@ import useFetch from '../../custom/useFetch';
 import './league.css'
 const League = () => {
     const {id} = useParams();
-    const {data: league} = useFetch(process.env.REACT_APP_LEAGUE_API_URL + '/' + id + '/');
+    const {data: league} = useFetch(process.env.REACT_APP_LEAGUE_API_URL + '/' + id);
 
     return (
         <>
