@@ -38,6 +38,11 @@
     color:#008CBA;
 }
 
-#winner-label{
-    
+a{
+    color:#008CBA;
+    text-decoration: none;
+}
+
+a:hover{
+    color:#02516b;
 }

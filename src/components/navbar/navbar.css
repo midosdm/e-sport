@@ -14,7 +14,7 @@
     position: relative;
   }
 
-  a{
+  .nav-title > a{
     color:white;
     text-decoration:none;
   }
