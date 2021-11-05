@@ -12,14 +12,21 @@ const LeagueList = () => {
     const {selectedGame} = useContext(contextSelectedGame);
 
     useEffect(()=> {
-        if(data && localStorage.getItem("selectedGame") != ""){
+        if(data && selectedGame == "" && !localStorage.getItem("selectedGame")){
+            
+                    setLeagues(data);
+        } else if (data && localStorage.getItem("selectedGame") != ""){
             const results = data.filter((league)=>{
-                        return league.videogame.name.startsWith(localStorage.getItem('selectedGame'));
-                    })
-                    setLeagues(results);
-        } else{
+                return league.videogame.name.startsWith(localStorage.getItem('selectedGame'));
+            })
+            setLeagues(results);
+        }
+        else{
             setLeagues(data);
         }
+        // if(data && selectedGame == ""){
+        //     setLeagues(data);
+        // }
         
     }, [data,selectedGame]);
 
